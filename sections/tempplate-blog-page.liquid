@@ -1,0 +1,15 @@
+{% for blog in blogs %}
+    <h1>{{ blog.title }}</h1>
+    {% for article in blog.articles %}
+      {{ article.title }}
+    {% endfor %} 
+  {% endfor %}
+<h1>teeeeest</h1>
+{% schema %}
+{
+    "name": "blog page",
+    "settings": [
+        
+        ]
+}
+{% endschema %}

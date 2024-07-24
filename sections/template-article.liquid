@@ -1,13 +1,16 @@
 <div class="article-container">
-    <div class="article-section">
-        <img src="https://cdn.pixabay.com/photo/2023/10/26/04/52/old-8341706_1280.jpg" alt="pic" class="article-img">
-        <div class="article-description-container">
-            <h1 class="article-title">title</h1>
-            <p class="article-description">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Pariatur provident nostrum possimus inventore nisi laboriosam consequatur modi nulla eos, commodi, omnis distinctio! Maxime distinctio impedit provident, voluptates illo odio nostrum minima beatae similique a sint sapiente voluptatum atque optio illum est! Tenetur tempora doloremque quae iste aperiam hic cumque repellat?</p>
+    {% for article in blog.articles %}
+        <div class="article-section">
+                <img src="{{ article.image.src |  image_url: width: "100%", height: "300px"  }}" alt="{{ article.image.alt }}" class="article-img">
+                <div class="article-description-container">
+                    <h1 class="article-title">{{ article.title }}</h1>
+                    <p class="article-description">{{ article.content }}</p>
 
-            <time datetime="" class="article-date">1111111</time>
-        </div>
-    </div>
+                    <time datetime="" class="article-date">{{ article.published_at | date }}</time>
+                </div>
+            </div>
+    {% endfor %}
+    
 </div>
 
 <style>
@@ -25,7 +28,7 @@
 
     .article-img{
         width: 100%;
-        height: auto;
+        height: 300px;
         object-fit: cover;
     }
 
@@ -34,6 +37,7 @@
         flex-direction: column;
         justify-content: center;
         align-items: center;
+        width: 70%;
     }
 
     .article-title{
@@ -52,3 +56,12 @@
         font-size: small;
     }
 </style>
+
+{% schema %}
+{
+    "name": "article page",
+    "settings": [
+        
+        ]
+}
+{% endschema %}
