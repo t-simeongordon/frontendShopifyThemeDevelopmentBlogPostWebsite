@@ -1,10 +1,68 @@
-{% for blog in blogs %}
-    <h1>{{ blog.title }}</h1>
-    {% for article in blog.articles %}
-      {{ article.title }}
-    {% endfor %} 
-  {% endfor %}
-<h1>teeeeest</h1>
+{% assign blogNames = "latest-news" %}
+<div class="all-blogs">
+    <div class="blog-section">
+        {% for blogName in blogNames %}
+        {% assign currentBlog = blogs[blogName] %}
+            {% if currentBlog %}
+                {% for article in currentBlog.articles %}
+                    <div class="article">
+                        {% if article.image %}
+                        <img src="{{ article.image.src |  image_url: width: 1800 }}" alt="{{ blogArticle.image.alt }}">
+                        {% else %}
+                        {% comment %} {{ 'image' | placeholder_svg_tag: '400x400', 'Placeholder Image' }} {% endcomment %}
+                        {% endif %}
+                        <h3 class="article-title">{{ article.title }}</h3>
+                        <p class="article-description">{{ article.content | strip_html | truncate: 100 }}</p>
+                        <a class="article-link" href="{{ article.url }}">Read more</a>
+                    </div>
+                {% endfor %}
+            {% else %}
+                <p>No articles found in this blog.</p>
+            {% endif %}
+        {% endfor %}
+    </div>
+</div>
+  
+
+<style>
+    .article {
+    width: 100%;
+    margin-bottom: 40px;
+    text-align: left;
+    }
+
+    .article img {
+    width: 100%;
+    height: 400px;
+    object-fit: cover;
+    margin-bottom: 20px;
+    }
+
+    .article-title {
+    font-size: 3rem;
+    font-weight: 400;
+    margin-bottom: 10px;
+    }
+
+    .article-description {
+    font-size: 1rem;
+    margin-bottom: 20px;
+    }
+
+    .article-link {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 5px;
+    }
+
+    .article-link:hover {
+    background-color: #0056b3;
+    }
+</style>
+
 {% schema %}
 {
     "name": "blog page",

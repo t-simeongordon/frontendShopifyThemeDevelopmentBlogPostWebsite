@@ -1,16 +1,13 @@
 <div class="article-container">
-    {% for article in blog.articles %}
-        <div class="article-section">
-                <img src="{{ article.image.src |  image_url: width: "100%", height: "300px"  }}" alt="{{ article.image.alt }}" class="article-img">
-                <div class="article-description-container">
-                    <h1 class="article-title">{{ article.title }}</h1>
-                    <p class="article-description">{{ article.content }}</p>
+    <div class="article-section">
+        <img src="{{ article.image.src |  image_url: width: "100%", height: "300px"  }}" alt="{{ article.image.alt }}" class="article-img">
+        <div class="article-description-container">
+            <h1 class="article-title">{{ article.title }}</h1>
+            <p class="article-description">{{ article.content }}</p>
 
-                    <time datetime="" class="article-date">{{ article.published_at | date }}</time>
-                </div>
-            </div>
-    {% endfor %}
-    
+            <time datetime="" class="article-date">{{ article.published_at | date }}</time>
+        </div>
+    </div>    
 </div>
 
 <style>
